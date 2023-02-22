@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import * as dat from 'dat.gui'
 
 import assets from "./Utils/assets.js";
 import Camera from './Camera.js';
@@ -9,9 +8,8 @@ import Time from './Utils/Time.js';
 import Renderer from './Renderer.js';
 import Debug from './Utils/Debug.js';
 import World from './World/World.js';
+import Controls from './World/Controls';
 import Ressources from './Utils/Ressources.js';
-import Controls from './World/Controls.js';
-
 
 export default class Experience {
     static instance
@@ -29,14 +27,15 @@ export default class Experience {
         this.sizes = new Sizes()
         this.scene = new THREE.Scene()
         this.camera = new Camera()
-        this.renderer = new Renderer()
-
         this.resources = new Ressources(assets)
         this.world = new World()
+        this.controls = new Controls()
+        this.renderer = new Renderer()
+        
+        
+        
 
         this.time = new Time();
-
-        this.controls = new Controls;
 
         // EMIT LISTENER
         //On emit event from Size.js call the update function from here to update all the stuff
@@ -69,7 +68,7 @@ export default class Experience {
 
     // RESIZE 
     resize() {
-        this.camera.resize();
+        /* this.camera.resize(); */
         this.renderer.resize();
     }
 
@@ -78,7 +77,7 @@ export default class Experience {
         this.camera.update();
         this.renderer.update();
 
-        if (this.controls) {
+        if(this.controls) {
             this.controls.update();
         }
     }

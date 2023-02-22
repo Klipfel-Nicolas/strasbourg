@@ -9,8 +9,14 @@ export default class Renderer {
         this.canvas = this.experience.canvas;
         this.camera = this.experience.camera;
         this.debug = this.experience.debug;
+        this.controls = this.experience.controls;
+        this.setRenderer();
 
-        this.setRenderer()
+        this.activeCamera = this.camera.perspectiveCamera;
+
+        this.controls.on("changeCamera", ()=> {
+            this.activeCamera = this.camera.orthographicCamera;
+        })
     }
 
     /**
@@ -57,10 +63,10 @@ export default class Renderer {
     //UPDATE
     update() {
         this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height)
-        this.renderer.render(this.scene, this.camera.perspectiveCamera);
+        this.renderer.render(this.scene, this.activeCamera);
         
         //Second screen
-        this.renderer.setScissorTest(true)
+        /*this.renderer.setScissorTest(true)
         this.renderer.setViewport(
             this.sizes.width - this.sizes.width/3,
             this.sizes.height - this.sizes.height/3,
@@ -68,15 +74,15 @@ export default class Renderer {
             this.sizes.height / 3
         )
 
-        this.renderer.setScissor(
+         this.renderer.setScissor(
             this.sizes.width - this.sizes.width/3,
             this.sizes.height - this.sizes.height/3,
             this.sizes.width / 3, 
             this.sizes.height / 3
         )
-
+ 
         this.renderer.render(this.scene, this.camera.orthographicCamera)
 
-        this.renderer.setScissorTest(false)
+        this.renderer.setScissorTest(false)*/
     }
 }

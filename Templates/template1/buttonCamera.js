@@ -3,7 +3,6 @@ const cameraBtn = {
                     
                     <button
                         id="cameraBtn" 
-                        onClick="handleCamera()"
                     >Click</button>
                     
             </script>`

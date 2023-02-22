@@ -1,8 +1,6 @@
-import * as THREE from 'three';
 import Experience from '../Experience';
 import { EventEmitter } from "events";
 
-import Controls from './Controls';
 import Environment from './Environement';
 import City from './City';
 
@@ -22,9 +20,8 @@ export default class World extends EventEmitter {
         this.resources.on("ready", ()=> {
             this.environment = new Environment();
             this.city = new City();
-            this.controls = new Controls();  
+             
      
-            //this.controls = new Controls();
             this.emit("worldready");
         }); 
     }
@@ -35,8 +32,6 @@ export default class World extends EventEmitter {
 
     //UPDATE
     update() {
-        if(this.controls) {
-            this.controls.update();
-        }
+        
     }
 }

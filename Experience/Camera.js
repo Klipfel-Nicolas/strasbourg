@@ -10,9 +10,8 @@ export default class Camera {
         this.canvas = this.experience.canvas;
         this.debug = this.experience.debug;
 
-
         this.createPerspectiveCamera(0, 25, 0)
-        this.createOrthographicCamera()
+        this.createOrthographicCamera(-10, 10, 0)
         this.setControls()
 
     }
@@ -41,8 +40,11 @@ export default class Camera {
 
     /**
      * Create Orthograpique Camera Function
+     * @param {Number} positionX 
+     * @param {Number} positionY 
+     * @param {Number} positionZ 
      */
-    createOrthographicCamera() {
+    createOrthographicCamera(positionX, positionY, positionZ) {
         this.orthographicCamera = new THREE.OrthographicCamera(
             (-this.sizes.aspect * this.sizes.frustrum)/2,
             (this.sizes.aspect * this.sizes.frustrum)/2,
@@ -52,9 +54,9 @@ export default class Camera {
             50
         );
 
-        this.orthographicCamera.position.y = 5.60;
-        this.orthographicCamera.position.z = 10;
-        this.orthographicCamera.rotation.x = -Math.PI / 6;
+        this.orthographicCamera.position.y = positionY;
+        this.orthographicCamera.position.z = positionZ;
+        this.orthographicCamera.position.x = positionX;
 
 
         this.scene.add(this.orthographicCamera);
@@ -89,7 +91,7 @@ export default class Camera {
     setControls() {
         this.controls = new OrbitControls(this.perspectiveCamera, this.canvas)
         this.controls.enableDamping = true
-        this.controls.enableZoom = false
+        this.controls.enableZoom = true
     }
 
     // RESIZE 
@@ -100,7 +102,7 @@ export default class Camera {
 
     //UPDATE
     update() {
-        this.controls.update();
+        this.controls.update(); 
 
         this.helper.matrixWorldNeedsUpdate = true;
         this.helper.update()

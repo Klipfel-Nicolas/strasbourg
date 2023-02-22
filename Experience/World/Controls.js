@@ -1,98 +1,154 @@
 import * as THREE from "three";
 import Experience from "../Experience";
+import { EventEmitter } from "events";
 
 
-export default class Controls {
+export default class Controls extends EventEmitter {
   constructor() {
+    super();
     this.experience = new Experience();
     this.scene = this.experience.scene;
-    this.sizes = this.experience.sizes;
-    this.resources = this.experience.resources;
-    this.time = this.experience.time;
     this.camera = this.experience.camera;
     this.city = this.experience.world.city;
 
     this.lerp = {
         current: 0,
         target: 0,
-        ease: 0.1
+        alpha: 0.05
     }
 
-    this.position = new THREE.Vector3( 0, 0, 0 );
-    this.lookAtPosition = new THREE.Vector3( 0, 0, 0 );
+    this.cameraMove = {
+      isMoving: false,
+      isZoomed: false,
+      forward: false,
+      back: false
+    }
 
-    this.directionalVector = new THREE.Vector3(0, 0, 0)
-    this.staticVector = new THREE.Vector3(0, 1, 0)
-    this.crossVector = new THREE.Vector3(0, 0, 0)
+    this.targetQuaternion = new THREE.Quaternion();
+    this.rotationMatrix = new THREE.Matrix4();
 
-    this.setPath();
-    this.onWheel();
+    //Give in parametre
+    this.elementTargetPosition = new THREE.Vector3( -1.04, 4.99, 6.90 )
+    this.lookAtPosition = new THREE.Vector3( 3, 2, 3 )
+
+    
+    this.targetPosititon = this.elementTargetPosition.clone();
+    this.lastPosition = new THREE.Vector3(0, 25, 0)
+ 
+    this.eventsListener();
   }
 
-  setPath() {
-    this.curve = new THREE.CatmullRomCurve3( [
-        new THREE.Vector3( -10, 10, 0 ),
-        new THREE.Vector3( -8, 8, 4 ),
-        new THREE.Vector3( -6, 6, 5 ),
-        /* new THREE.Vector3( -4, 0, 6 ), */
-    ]);
-
-    //Create a visible line
-    const points = this.curve.getPoints( 50 );
-    const geometry = new THREE.BufferGeometry().setFromPoints( points );
-
-    const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-
-    // Create the final object to add to the scene
-    const curveObject = new THREE.Line( geometry, material );
-    this.scene.add(curveObject)
+  /**
+   * Set the camera quaternion (rotation from camera to target)
+   * @param {Vector3} eyes 
+   * @param {Vector3} target 
+   * @param {Vector3} up 
+   */
+  setTargetQuaternion(eyes, target, up) {
+    this.rotationMatrix.lookAt(eyes, target, up)
+    this.targetQuaternion.setFromRotationMatrix(this.rotationMatrix)
   }
 
-  handleOrtographicCamera(e) {
-    if(e.deltaY > 0) {
-      this.lerp.target += 0.05;
-      this.back = false;
+  /**
+   * Move camera to
+   * @param {Vector 3} cameraTarget 
+   * @param {Number} cameraLerpAlpha 
+   */
+  lerpCamera(cameraTarget, cameraLerpAlpha) {
 
-      if (this.lerp.target > 1 ) {
+    this.camera.controls.enabled = false;
 
-          this.lerp.target = 1
-          this.lerp.current = 1
-
-          
-      }
+    if(this.cameraMove.forward) {
+      this.camera.perspectiveCamera.quaternion.rotateTowards(this.targetQuaternion, .05)
+      this.camera.controls.target.lerp(this.lookAtPosition, .05)
     } else {
-      if(!(this.camera.orthographicCamera.zoom > 1)) this.lerp.target -= 0.05;
-        
-        this.back = true;
-
-        if (this.lerp.target < 0 ) {
-          this.lerp.target = 0
-          this.lerp.current = 0
-        }
+      this.camera.controls.target.lerp(new THREE.Vector3(0, 0, 0), .05)
     }
+    
 
-    this.handleZoom()
+    //Move the camera on target (lerp from three.js)
+    this.camera.perspectiveCamera.position.lerp(cameraTarget, cameraLerpAlpha)
+    this.camera.controls.update(); 
+
+    //Handle Zoom 
+    this.fovZoomCamera();
+    
+    //Increment to handle lerpComplete
+    this.lerp.current += 0.009;
+    if (this.lerp.current > 1){     
+      this.onLerpComplete(cameraTarget);
+    } 
   }
 
-  handleZoom() {
-    if(this.lerp.target >= 1){
-      if(!this.back && this.camera.orthographicCamera.zoom < 2) this.camera.orthographicCamera.zoom += .05
-      if(this.back && this.camera.orthographicCamera.zoom > 1) this.camera.orthographicCamera.zoom -= .05
+  /**
+   * Zoom In smoothly
+   */
+  fovZoomCamera() {
+    if(this.camera.perspectiveCamera.fov >= 35 && this.cameraMove.forward ) {
+      this.camera.perspectiveCamera.fov -= .5;
+    } else if (this.camera.perspectiveCamera.fov <= 75 && this.cameraMove.back) {
+      this.camera.perspectiveCamera.fov += .9;
+    }
+    
+    this.camera.perspectiveCamera.updateProjectionMatrix();    
+  }
+
+  /**
+   * Lerp camera animation complete
+   * @param {Vector3} cameraTarget 
+   */
+  onLerpComplete(cameraTarget) {
+    // Finish the movement and reset all value
+    /* this.camera.perspectiveCamera.position.lerp(cameraTarget, 1); */
+    this.cameraMove.isMoving = false
+    this.lerp.alpha = 0.05
+    this.lerp.current = 0
+
+    this.cameraMove.forward = false;
+    this.cameraMove.back = false
+
+    this.camera.controls.enabled = true;
+
+  }
+
+  /**
+   * onClick (zoom in on target)
+   */
+  onClickAnimation() {
+    
+    this.setTargetQuaternion(this.camera.perspectiveCamera.position, this.lookAtPosition, this.camera.perspectiveCamera.up)
+    
+    if(!this.cameraMove.isZoomed) {
+      this.lastPosition = this.camera.perspectiveCamera.position.clone();
+      this.targetPosititon = this.elementTargetPosition.clone();
       
-      
-    } /* else if(this.back && this.camera.orthographicCamera.zoom > 1) {
-      this.camera.orthographicCamera.zoom -= .05
-    } */
-
-    this.camera.orthographicCamera.updateProjectionMatrix()
+      this.cameraMove.isMoving = true;
+      this.cameraMove.forward = true;
+      this.cameraMove.isZoomed = true;
+    } 
   }
 
-  onWheel() {
-    window.addEventListener('wheel', (e) => this.handleOrtographicCamera(e))
+  /**
+   * Wheel event (zoom Back)
+   * @param {Event} e 
+   */
+  onWheel(e) {
+    if(!this.cameraMove.isMoving && this.cameraMove.isZoomed){
+
+      if (e.deltaY < 0) {
+
+        this.targetPosititon = this.lastPosition;
+        this.cameraMove.back = true;
+        this.cameraMove.isMoving = true;
+        this.cameraMove.isZoomed = false;
+      } 
+    }
   }
 
-  lerpInterpolation(start, end, amt) {
-    return (1-amt) * start + amt * end
+  // EVENT LISTENER
+  eventsListener() {
+    document.querySelector('#cameraBtn').addEventListener('click', this.onClickAnimation.bind(this))
+    window.addEventListener('wheel', this.onWheel.bind(this))
   }
 
 
@@ -105,22 +161,9 @@ export default class Controls {
    * Update Function
    */
   update() {
-    
-    
-    this.lerp.current = this.lerpInterpolation(this.lerp.current, this.lerp.target, this.lerp.ease)
-    
 
-    this.curve.getPointAt(this.lerp.current, this.position)
-
-    this.camera.orthographicCamera.position.copy(this.position)
-
-    this.directionalVector.subVectors(this.curve.getPointAt((this.lerp.current % 1 )+ 0.000001), this.position);
-    this.directionalVector.normalize();
-    this.crossVector.crossVectors(
-        this.directionalVector,
-        this.staticVector,
-    )
-    
-    this.camera.orthographicCamera.lookAt(2, 2.5, 3)
+    if(this.cameraMove.isMoving) {
+      this.lerpCamera(this.targetPosititon, this.lerp.alpha)
+    }
   }
 }
