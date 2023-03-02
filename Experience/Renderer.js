@@ -9,12 +9,12 @@ export default class Renderer {
         this.canvas = this.experience.canvas;
         this.camera = this.experience.camera;
         this.debug = this.experience.debug;
-        this.controls = this.experience.controls;
+        this.cameraControls = this.experience.cameraControls;
         this.setRenderer();
 
         this.activeCamera = this.camera.perspectiveCamera;
 
-        this.controls.on("changeCamera", ()=> {
+        this.cameraControls.on("changeCamera", ()=> {
             this.activeCamera = this.camera.orthographicCamera;
         })
     }

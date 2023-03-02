@@ -8,8 +8,9 @@ import Time from './Utils/Time.js';
 import Renderer from './Renderer.js';
 import Debug from './Utils/Debug.js';
 import World from './World/World.js';
-import Controls from './World/Controls';
+import CameraControls from './World/CameraControls';
 import Ressources from './Utils/Ressources.js';
+import ListHtml from './TemplateElements/ListHtml.js';
 
 export default class Experience {
     static instance
@@ -29,11 +30,11 @@ export default class Experience {
         this.camera = new Camera()
         this.resources = new Ressources(assets)
         this.world = new World()
-        this.controls = new Controls()
+        this.cameraControls = new CameraControls()
         this.renderer = new Renderer()
         
         
-        
+        this.listHtml = new ListHtml()
 
         this.time = new Time();
 
@@ -77,8 +78,8 @@ export default class Experience {
         this.camera.update();
         this.renderer.update();
 
-        if(this.controls) {
-            this.controls.update();
+        if(this.cameraControls) {
+            this.cameraControls.update();
         }
     }
     
