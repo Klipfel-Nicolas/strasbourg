@@ -18,8 +18,16 @@ body {
   overflow: hidden;
 }
 
-#cameraBtn {
+#mainTitle-html {
   position: absolute;
   top: 50px;
   left: 50px;
+  color: white;
+}
+
+#elementsList-html{
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  color: white;
 }

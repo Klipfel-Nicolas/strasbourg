@@ -10,7 +10,7 @@ import Debug from './Utils/Debug.js';
 import World from './World/World.js';
 import CameraControls from './World/CameraControls';
 import Ressources from './Utils/Ressources.js';
-import ListHtml from './TemplateElements/ListHtml.js';
+import PageHtml from './TemplateHtml/PageHtml.js';
 
 export default class Experience {
     static instance
@@ -34,7 +34,7 @@ export default class Experience {
         this.renderer = new Renderer()
         
         
-        this.listHtml = new ListHtml()
+        this.pageHtml = new PageHtml()
 
         this.time = new Time();
 
@@ -80,6 +80,10 @@ export default class Experience {
 
         if(this.cameraControls) {
             this.cameraControls.update();
+        }
+
+        if(this.listHtml) {
+            this.listHtml.update()
         }
     }
     

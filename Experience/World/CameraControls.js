@@ -27,12 +27,21 @@ export default class CameraControls extends EventEmitter {
     this.rotationMatrix = new THREE.Matrix4();
 
     //Give in parametre
-    this.elementTargetPosition = new THREE.Vector3( -1.04, 4.99, 6.90 )
+    /* this.elementTargetPosition = new THREE.Vector3( -1.04, 4.99, 6.90 )
     this.lookAtPosition = new THREE.Vector3( 3, 2, 3 )
-
-    this.setTargetPosition(this.elementTargetPosition.clone())
+    this.setTargetPosition(this.elementTargetPosition.clone()) */
  
     this.eventsListener();
+  }
+
+  /**
+   * Create vector Three from string
+   * @param {String} coordinates 
+   * @returns THREE.Vector3
+   */
+  createVectorThree(coordinates) {
+    let coord = coordinates.split(',')
+    return new THREE.Vector3(coord[0], coord[1], coord[2])
   }
 
   /**
@@ -139,14 +148,17 @@ export default class CameraControls extends EventEmitter {
 
   /**
    * onClick (zoom in on target)
+   * @param {String} target 
+   * @param {String} lookAt 
    */
   eventFocusIn(target, lookAt) {
-    console.log(target)
-    console.log(lookAt)
-    
-    this.setTargetQuaternion(this.camera.perspectiveCamera.position, this.lookAtPosition, this.camera.perspectiveCamera.up)
-    
-    if(!this.cameraState.isFocus) {
+
+    if(!this.cameraState.isFocus && !this.cameraState.isMoving) {
+      this.elementTargetPosition = this.createVectorThree(target)
+      this.lookAtPosition = this.createVectorThree(lookAt)
+
+      this.setTargetQuaternion(this.camera.perspectiveCamera.position, this.lookAtPosition, this.camera.perspectiveCamera.up)
+
       this.setLastPosition(this.camera.perspectiveCamera.position.clone())
       this.setTargetPosition(this.elementTargetPosition.clone())
       

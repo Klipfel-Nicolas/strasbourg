@@ -13,13 +13,29 @@
       <canvas class="experience-canvas"></canvas>
     </div>
 
-    <div id="template1area"></div>
+    <div id="mainTitle-html"></div>
+
+    <div id="elementsList-html"></div>
 
     <div class="scriptTemplate"></div>
 
-    <script type="module" src="Templates/index.js"></script>
     <script type="module" src="/main.js"></script>
-
     
+    <script id="mainTitle-js" type="text/x-handlebars" >
+      <h1>{{title}}</h1>
+    </script>
+
+    <script id="elementsList-js" type="text/x-handlebars">
+      <ol>
+        {{#each list}}
+          <li 
+            class="listElement" 
+            data-position="{{this.position}}"
+            data-look="{{this.lookAt}}"
+          >{{this.name}}</li>
+        {{/each}}
+      </ol>
+    </script>
+
   </body>
 </html>
