@@ -8,7 +8,20 @@ export default class ListHtml {
         this.mainTitle = title
 
         this.page.compileTemplate("#mainTitle-js")
-        this.page.fillHtml("#mainTitle-html", {title: this.mainTitle})
+        this.setMainTitle(this.mainTitle)
+
+        //Handle list elements Focus
+        this.page.list.on("elementFocused", (name) => {
+            this.setMainTitle(name)
+        })
+
+        this.page.list.on("no-elementFocused", () => {
+            this.setMainTitle(this.mainTitle)
+        })
+    }
+
+    setMainTitle(newTitle) {
+        this.page.fillHtml("#mainTitle-html", {title: newTitle})
     }
 
 

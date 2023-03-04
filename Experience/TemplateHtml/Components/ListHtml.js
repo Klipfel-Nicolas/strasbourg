@@ -1,11 +1,13 @@
-import Experience from "../../Experience";
 import PageHtml from "../PageHtml";
+import Experience from "../../Experience";
+import { EventEmitter } from "events";
 
 import elements from '../../../datas/elements';
 
 
-export default class ListHtml {
+export default class ListHtml extends EventEmitter{
     constructor() {
+        super();
         this.experience = new Experience();
         this.cameraControls = this.experience.cameraControls;
 
@@ -18,8 +20,6 @@ export default class ListHtml {
         }
 
         
-        
-        
         this.page.compileTemplate("#elementsList-js")
         this.page.fillHtml("#elementsList-html", this.data)
         
@@ -28,21 +28,20 @@ export default class ListHtml {
         this.eventsListener();
     }
 
-    updateListElement() {
-        this.listElements = document.querySelectorAll('.listElement');
-    }
-
     eventsListener() {
-        this.listElements.forEach(element => {
+        this.listElements.forEach(element => {  
             element.addEventListener('click', () => {
-                this.data.title = "Hey"
-                this.page.compileTemplate('#mainTitle-js')
-                this.page.fillHtml('#mainTitle-html', this.data)
-                this.cameraControls.eventFocusIn(element.dataset.position, element.dataset.look) 
-            })
+                if(!this.cameraControls.cameraState.isFocus && !this.cameraControls.cameraState.isMoving) {
+                    this.emit("elementFocused", element.textContent);
+                    this.cameraControls.eventFocusIn(element.dataset.position, element.dataset.look) 
+                }
+            })       
         })
 
-        window.addEventListener('wheel', (e) => this.cameraControls.eventFocusOut(e))
+        window.addEventListener('wheel', (e) => {
+          this.cameraControls.eventFocusOut(e)
+          this.emit("no-elementFocused");  
+        })
     }
 
     /**
