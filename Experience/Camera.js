@@ -71,18 +71,18 @@ export default class Camera {
         }
 
         // Helper
-        this.helper = new THREE.CameraHelper( this.orthographicCamera );
-        this.scene.add(this.helper)
+        /* this.helper = new THREE.CameraHelper( this.orthographicCamera );
+        this.scene.add(this.helper) */
 
         // Helper
-        const size = 50;
+        /* const size = 50;
         const divisions = 50;
 
         const gridHelper = new THREE.GridHelper( size, divisions );
         this.scene.add( gridHelper ); 
 
         const axesHelper = new THREE.AxesHelper( 5 );
-        this.scene.add( axesHelper );
+        this.scene.add( axesHelper ); */
     }
 
     /**
@@ -104,9 +104,9 @@ export default class Camera {
     update() {
         this.controls.update(); 
 
-        this.helper.matrixWorldNeedsUpdate = true;
+        /* this.helper.matrixWorldNeedsUpdate = true;
         this.helper.update()
         this.helper.position.copy(this.orthographicCamera.position)
-        this.helper.rotation.copy(this.orthographicCamera.rotation)
+        this.helper.rotation.copy(this.orthographicCamera.rotation) */
     }
 }

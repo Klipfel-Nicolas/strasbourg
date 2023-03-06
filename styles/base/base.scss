@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  user-select: none
+}
+
+body {
+  font-family: $font-main-regular;
+  background: $dark-gradient;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+
+
+
+
+
