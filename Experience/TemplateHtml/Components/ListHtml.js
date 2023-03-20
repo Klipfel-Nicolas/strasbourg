@@ -23,7 +23,7 @@ export default class ListHtml extends EventEmitter{
         this.page.compileTemplate("#elementsList-js")
         this.page.fillHtml("#elementsList-html", this.data)
         
-        this.listElements = document.querySelectorAll('.listElement');
+        this.listElements = document.querySelectorAll('.listElement-js');
 
         this.eventsListener();
     }

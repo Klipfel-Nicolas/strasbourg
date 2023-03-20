@@ -10,7 +10,7 @@ export default class Camera {
         this.canvas = this.experience.canvas;
         this.debug = this.experience.debug;
 
-        this.createPerspectiveCamera(0, 25, 0)
+        this.createPerspectiveCamera(0, 45, 0)
         this.createOrthographicCamera(-10, 10, 0)
         this.setControls()
 
@@ -30,10 +30,11 @@ export default class Camera {
         //Debug
         if(this.debug.active) {
             this.debugPerspectiveCamera = this.debug.debugFolderCamera.addFolder('perspective')
+            this.debugPositionPerspectiveCamera = this.debug.debugFolderCamera.addFolder('position')
 
-            this.debugPerspectiveCamera.add(this.perspectiveCamera.position, 'x').min(- 25).max(50).step(1).name('camera-X')
-            this.debugPerspectiveCamera.add(this.perspectiveCamera.position, 'y').min(- 25).max(50).step(1).name('camera-Y')
-            this.debugPerspectiveCamera.add(this.perspectiveCamera.position, 'z').min(- 25).max(50).step(1).name('camera-Z')
+            this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'x').min(- 25).max(50).step(1).name('camera-X')
+            this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'y').min(- 25).max(50).step(1).name('camera-Y')
+            this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'z').min(- 25).max(50).step(1).name('camera-Z')
         }
         
     }
@@ -75,14 +76,14 @@ export default class Camera {
         this.scene.add(this.helper) */
 
         // Helper
-        /* const size = 50;
+        /*  const size = 50;
         const divisions = 50;
 
         const gridHelper = new THREE.GridHelper( size, divisions );
         this.scene.add( gridHelper ); 
 
         const axesHelper = new THREE.AxesHelper( 5 );
-        this.scene.add( axesHelper ); */
+        this.scene.add( axesHelper );*/
     }
 
     /**

@@ -61,7 +61,7 @@ export default class Experience {
             if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial){
                 child.material.needsUpdate = true
                 
-                /* child.material.color.setHex(0xF1A6A4) */
+                /* child.material.color.setHex(0x131862) */
 
                 child.castShadow = castShadow
                 child.receiveShadow = receiveShadow

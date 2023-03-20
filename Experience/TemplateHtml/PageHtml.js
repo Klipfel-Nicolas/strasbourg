@@ -1,5 +1,6 @@
 import ListHtml from "./Components/ListHtml";
 import TitleHtml from "./Components/TitleHtml";
+import WeatherHtml from "./Components/WeatherHtml";
 
 export default class PageHtml {
   static instance
@@ -8,10 +9,9 @@ export default class PageHtml {
     if(PageHtml.instance) {
       return PageHtml.instance
     }
-    PageHtml.instance = this
+    PageHtml.instance = this 
 
-    this.list = new ListHtml()
-    this.title = new TitleHtml("Strasbourg")
+    this.compilePage()
   }
 
   /**
@@ -31,11 +31,24 @@ export default class PageHtml {
     document.querySelector(htmlId).innerHTML = this.template(datas);
   }
 
+  /**
+   * Compile the page with all html class
+   */
+  async compilePage() {
+    this.weather = new WeatherHtml()
+    this.currentWeather = await this.weather.getCurrentWeather();
+
+    //Wait about currentWeather
+    this.list = new ListHtml()
+    this.title = new TitleHtml("Strasbourg", this.currentWeather)
+
+  }
+
 
   // Loop
 
   update() {
-    
+    this.t
   }
 
   // Listeners

@@ -15,18 +15,21 @@ $font-main-regular:     'Steelfish';
 $black: #000000;
 $white: #FFFFFF;
 
-$blue: #1ADECA;
 
-$darker: #121212;
 
-$grey-9: #1F2933;
-$grey-8: #323F4B;
-$grey-7: #3E4C59;
-$grey-6: #52606D;
-$grey-5: #616E7C;
-$grey-4: #7B8794;
-$grey-3: #9AA5B1;
-$grey-2: #CBD2D9;
-$grey-1: #E4E7EB;
+$darker: #0B0B0B;
 
-$dark-gradient: radial-gradient(circle, rgba(26,35,43,1) 1%, rgba(0,0,0,1) 100%); //https://cssgradient.io/
+$grey-theme: #939393;
+$grey-theme-2: #8F8F90;
+$grey-theme-3: #5F5F5F;
+
+$gray-dark : #1f1f1f;
+
+$gray-1:rgb(51, 51, 51);
+$gray-2:#666666;
+$gray-3:#989898;
+$gray-4:#fbfbfb;
+
+/* $dark-gradient: radial-gradient(circle, rgba(26,35,43,1) 1%, rgba(0,0,0,1) 100%);  *///https://cssgradient.io/
+ /* $dark-gradient: radial-gradient(circle, rgb(3, 4, 62) .1%,rgb(5, 5, 23) 1%, rgba(0,0,0,1) 100%); *///https://cssgradient.io/
+ $dark-gradient: radial-gradient(circle, rgb(22, 28, 33) 1%, rgb(13, 13, 13) 100%);

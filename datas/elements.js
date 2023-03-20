@@ -1,20 +1,44 @@
 const elements = [
         {
-            name: "Element 1",
-            position: [-1.04, 4.99, 6.90],
-            lookAt: [3, 2, 3],
-            description: "Hey c'est l'element 1"
+            name: "Cathédrale",
+            position: [-21, 4, 0],
+            lookAt: [-17, 2, 0],
+            description: "Cathédral de Strasbourg"
         } ,
         {
-            name: "Element 2",
-            position: [3, 6, 9],
-            lookAt: [12, 1, 7],
+            name: "Eglise Ste Madelaine",
+            position: [-12, 6, 2],
+            lookAt: [-8, 1, 4],
             description: "Hey c'est l'element 2"
         },
         {
-            name: "Element 3",
-            position: [14, 4, -2],
-            lookAt: [16, 2, -8],
+            name: "Eglise St Paul",
+            position: [-4, 3, -6],
+            lookAt: [-2, 2, -8],
+            description: "Hey c'est l'element 3"
+        },
+        {
+            name: "Eglise St Pierre le jeune",
+            position: [-22, 3, -8],
+            lookAt: [-17, 2, -14],
+            description: "Hey c'est l'element 3"
+        },
+        {
+            name: "Gare Central",
+            position: [-20, 10, -3],
+            lookAt: [-47, 2, -7],
+            description: "Hey c'est l'element 3"
+        },
+        {
+            name: "Wild Code School",
+            position: [10, 5, 5],
+            lookAt: [7, 3, 10],
+            description: "Hey c'est l'element 3"
+        },
+        {
+            name: "Quartier Européen",
+            position: [20, 10, -13],
+            lookAt: [15, 2, -23],
             description: "Hey c'est l'element 3"
         },
 ]

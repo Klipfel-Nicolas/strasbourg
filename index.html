@@ -19,22 +19,45 @@
 
     <div class="scriptTemplate"></div>
 
+    <div>
+      <object id="skyline" data="./public/images/icons/skyline-strasbourg.svg"></object> 
+    </div>
+
     <script type="module" src="/main.js"></script>
     
+    <!------------------
+      Template Title
+    ------------------->
     <script id="mainTitle-js" type="text/x-handlebars" >
-      <h1>{{title}}</h1>
+      <h1 class="main-title__title">{{title}}</h1>
+
+      <div class="main-title__weather-infos">
+        <p>
+          <span>current weather:</span>
+          <span>{{temperature}}°C</span>
+          <span>{{currentWeather}}</span>
+          <span>
+            {{windspeed}} km/h
+            <object id="icon-wind" data="./public/images/icons/wind.svg" width="15" height="15"></object> 
+          </span>
+        </p>
+      </div>
     </script>
 
+
+    <!------------------
+      Template List
+    ------------------->
     <script id="elementsList-js" type="text/x-handlebars">
-      <ol>
+      <ul class="elementsList">
         {{#each list}}
           <li 
-            class="listElement" 
+            class="elementsList__element listElement-js" 
             data-position="{{this.position}}"
             data-look="{{this.lookAt}}"
           >{{this.name}}</li>
         {{/each}}
-      </ol>
+      </ul>
     </script>
 
   </body>

@@ -1,6 +1,40 @@
 #elementsList-html {
     position: absolute;
-    top: 50px;
-    right: 50px;
-    color: white;
+    left: 50px;
+    bottom: 50px;
+    color: $gray-2;
+  
+    
+    .elementsList{
+        display: flex;
+
+        &__element {
+          
+
+
+            &::before,
+            &::after {
+               
+            }
+            
+            &::before {
+                
+            }
+
+            &::after {
+                
+            }
+
+            &:hover {
+
+                &::before {
+                }
+
+                &::after {
+                    
+                }
+            }
+        }
+    }
+
 }

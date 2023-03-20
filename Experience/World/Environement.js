@@ -10,8 +10,8 @@ export default class Environment {
         this.debug = this.experience.debug
 
         //Light
-        this.setSunlight("#fff", 1, -12 , 7, 3)
-        /**/ this.setAmbiantLight("#fff", .2) 
+        this.setSunlight("#fff", 1, -25 , 6, 4)
+        /**/ this.setAmbiantLight("#fff", .5) 
 
     }
 
@@ -26,7 +26,7 @@ export default class Environment {
     setSunlight(color, intensity, positionX, positionY, positionZ) {
         //Directional Light
         this.sunLight = new THREE.DirectionalLight(color, intensity);
-        this.sunLight.castShadow = true;
+        this.sunLight.castShadow = true; 
         this.sunLight.shadow.camera.far = 20;
         this.sunLight.shadow.mapSize.set(2048, 2048);
         this.sunLight.shadow.normalBias = 0.05;
@@ -36,7 +36,6 @@ export default class Environment {
         this.scene.add(helper) */
 
         this.sunLight.position.set(positionX, positionY, positionZ);
-        //this.sunLight.position.set(-1, -1, 1);
         
         this.scene.add(this.sunLight);
 
