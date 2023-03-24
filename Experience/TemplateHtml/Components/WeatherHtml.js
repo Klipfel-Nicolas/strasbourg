@@ -4,9 +4,9 @@ import weatherCode from "../../../datas/weatherCode";
 
 export default class WeatherHtml {
     constructor() {
-        
         this.page = new PageHtml();
 
+        this.page.compileTemplate("#weather-js");
     }
 
     async getCurrentWeather() {
@@ -19,6 +19,15 @@ export default class WeatherHtml {
         return this.currentWeather;
     }
 
+    async setCurrentWeather() {
+        await this.getCurrentWeather();
+
+        this.page.fillHtml("#weather-html", {
+            currentWeather: this.currentWeather.currentWeather,
+            temperature: Math.round(this.currentWeather.temperature),
+            windspeed: this.currentWeather.windspeed
+        })
+    }
 
     /**
    * Update Function

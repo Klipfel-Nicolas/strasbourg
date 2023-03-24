@@ -36,11 +36,10 @@ export default class PageHtml {
    */
   async compilePage() {
     this.weather = new WeatherHtml()
-    this.currentWeather = await this.weather.getCurrentWeather();
+    this.currentWeather = await this.weather.setCurrentWeather();
 
-    //Wait about currentWeather
     this.list = new ListHtml()
-    this.title = new TitleHtml("Strasbourg", this.currentWeather)
+    this.title = new TitleHtml("Strasbourg")
 
   }
 
@@ -48,7 +47,6 @@ export default class PageHtml {
   // Loop
 
   update() {
-    this.t
   }
 
   // Listeners

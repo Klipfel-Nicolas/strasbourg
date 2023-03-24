@@ -8,50 +8,53 @@
     <title>Strasbourg</title>
   </head>
   
-  <body id="strasbourg">
-   
+  <body>
+
+    <main class="landing-layout">
+      
+      <!-- Side -->
+      <div class="landing-layout__side-bar">
+        <div></div>
+        <div><div id="mainTitle-html"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Clock -->
+      <div id="clock">
+        <span class="time"></span>
+        <span class="session"></span>
+      </div>
+
+      <!-- Weather -->
+      <div id="weather-html">
+        
+      </div>
+
+      <!-- Three.js-->
+      <div class="landing-layout__experience">
+        <canvas class="experience-canvas"></canvas>
+      </div>
+
+      <!-- List -->
+      <div id="elementsList-html"></div>
+        
+
+
     <!------------------
-      Three.js
+        Script
     ------------------->
-    <div class="experience">
-      <canvas class="experience-canvas"></canvas>
-    </div>
-
-    <div id="mainTitle-html"></div>
-
-    <div id="elementsList-html"></div>
-
-    <div class="scriptTemplate"></div>
-
-    <div>
-      <object id="skyline" data="./public/images/icons/skyline-strasbourg.svg"></object> 
-    </div>
-
     <script type="module" src="/main.js"></script>
+    <script src="/script/clock.js"></script>
     
     <!------------------
-      Template Title
+      Template Script
     ------------------->
+    <!-- Title -->
     <script id="mainTitle-js" type="text/x-handlebars" >
       <h1 class="main-title__title">{{title}}</h1>
-
-      <div class="main-title__weather-infos">
-        <p>
-          <span>current weather:</span>
-          <span>{{temperature}}°C</span>
-          <span>{{currentWeather}}</span>
-          <span>
-            {{windspeed}} km/h
-            <object id="icon-wind" data="./public/images/icons/wind.svg" width="15" height="15"></object> 
-          </span>
-        </p>
-      </div>
     </script>
 
-
-    <!------------------
-      Template List
-    ------------------->
+    <!-- List -->
     <script id="elementsList-js" type="text/x-handlebars">
       <ul class="elementsList">
         {{#each list}}
@@ -59,9 +62,28 @@
             class="elementsList__element listElement-js" 
             data-position="{{this.position}}"
             data-look="{{this.lookAt}}"
-          >{{this.name}}</li>
+          >
+            <span>{{this.name}}</span>
+          </li>
         {{/each}}
       </ul>
+    </script>
+
+    <!-- Weather -->
+    <script id="weather-js" type="text/x-handlebars">
+
+      <div class="weather-info">
+        <h3>Current weather :</h3>
+        <p>{{currentWeather}}</p>
+      </div>
+      <div class="weather-info">
+        <h3>Temperature :</h3>
+        <p>{{temperature}}°C</p>
+      </div>
+      <div class="weather-info">
+        <h3>Wind :</h3>
+        <p>{{windspeed}}km/h</p>
+      </div>
     </script>
 
   </body>

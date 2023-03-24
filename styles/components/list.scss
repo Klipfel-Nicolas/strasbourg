@@ -1,40 +1,31 @@
 #elementsList-html {
     position: absolute;
-    left: 50px;
-    bottom: 50px;
-    color: $gray-2;
-  
-    
-    .elementsList{
+    top: 50px;
+    right: 50px;
+
+    .elementsList {
         display: flex;
+        align-items: flex-start;
+        height: 10vh;
+        backdrop-filter: blur(2px);
+
 
         &__element {
-          
+            flex:1;
+            padding-top: 10px;
+            cursor: pointer;
 
-
-            &::before,
-            &::after {
-               
+            &:not(:first-child){
+               border-top: 1px solid $grey-3; 
             }
             
-            &::before {
-                
-            }
 
-            &::after {
-                
-            }
-
-            &:hover {
-
-                &::before {
-                }
-
-                &::after {
-                    
-                }
+            span {
+                display: block;
+                transform: rotate(-45deg);
+                transform-origin: right;
+                text-align: end; 
             }
         }
     }
-
 }
