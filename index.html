@@ -11,12 +11,15 @@
   <body>
 
     <main class="landing-layout">
-      
+     
       <!-- Side -->
       <div class="landing-layout__side-bar">
         <div></div>
         <div><div id="mainTitle-html"></div></div>
-        <div></div>
+        <div>
+          <!-- Infos Banner -->
+           <div id="infosBanner-html"></div>
+        </div>
       </div>
 
       <!-- Clock -->
@@ -83,6 +86,14 @@
       <div class="weather-info">
         <h3>Wind :</h3>
         <p>{{windspeed}}km/h</p>
+      </div>
+    </script>
+
+    <!-- Infos Banner -->
+    <script id="infosBanner-js" type="text/x-handlebars">
+      <div class="Infos-banner">
+        <div id="svg-infos">{{svg}}</div>
+        <p>{{description}}</p>
       </div>
     </script>
 

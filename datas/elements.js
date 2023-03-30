@@ -3,7 +3,8 @@ const elements = [
             name: "Cathédrale",
             position: [-21, 4, 0],
             lookAt: [-17, 2, 0],
-            description: "Cathédral de Strasbourg"
+            description: "Cathédral de Strasbourg",
+            svg:"/images/cath.svg"
         } ,
         {
             name: "Eglise Ste Madelaine",

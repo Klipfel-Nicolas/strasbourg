@@ -1,6 +1,7 @@
 import ListHtml from "./Components/ListHtml";
 import TitleHtml from "./Components/TitleHtml";
 import WeatherHtml from "./Components/WeatherHtml";
+import InfosBannerHtml from "./Components/InfosBannerHtml";
 
 export default class PageHtml {
   static instance
@@ -9,7 +10,7 @@ export default class PageHtml {
     if(PageHtml.instance) {
       return PageHtml.instance
     }
-    PageHtml.instance = this 
+    PageHtml.instance = this;
 
     this.compilePage()
   }
@@ -28,6 +29,11 @@ export default class PageHtml {
    * @param {Object} datas
    */
   fillHtml(htmlId, datas) {
+    document.querySelector(htmlId).innerHTML = template(datas);
+  }
+
+  innerContent(scriptId, htmlId, datas) {
+    this.template = Handlebars.compile(document.querySelector(scriptId).innerHTML);
     document.querySelector(htmlId).innerHTML = this.template(datas);
   }
 
@@ -35,10 +41,9 @@ export default class PageHtml {
    * Compile the page with all html class
    */
   async compilePage() {
-    this.weather = new WeatherHtml()
-    this.currentWeather = await this.weather.setCurrentWeather();
 
-    this.list = new ListHtml()
+    this.list = new ListHtml();
+    this.infosBanner = new InfosBannerHtml()
     this.title = new TitleHtml("Strasbourg")
 
   }

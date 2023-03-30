@@ -19,9 +19,7 @@ export default class ListHtml extends EventEmitter{
             })
         }
 
-        
-        this.page.compileTemplate("#elementsList-js")
-        this.page.fillHtml("#elementsList-html", this.data)
+        this.page.innerContent("#elementsList-js", "#elementsList-html", this.data)
         
         this.listElements = document.querySelectorAll('.listElement-js');
 
@@ -31,8 +29,11 @@ export default class ListHtml extends EventEmitter{
     eventsListener() {
         this.listElements.forEach(element => {  
             element.addEventListener('click', () => {
+                //Get element focused datas
+                const elementDatas = this.data.list.filter(listEl => listEl.name === element.innerText)[0]
+                
                 if(!this.cameraControls.cameraState.isFocus && !this.cameraControls.cameraState.isMoving) {
-                    this.emit("elementFocused", element.textContent);
+                    this.emit("elementFocused", elementDatas);
                     this.cameraControls.eventFocusIn(element.dataset.position, element.dataset.look) 
                 }
             })       

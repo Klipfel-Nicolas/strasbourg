@@ -4,17 +4,23 @@
     &__side-bar{
         display: grid;
         position: relative;
-    z-index: 2;
+        z-index: 2;
         width: 5vw;
         height: 100vh;
         grid-template-rows: repeat(3, 1fr);
         border-right: 2px solid $grey-2;
+
+
+        &>div {
+            position: relative;
+        }
 
         & >div:nth-child(2) {
             border-top: 2px solid $grey-2;
             border-bottom: 2px solid $grey-2;
             box-shadow: 4px 9px 5px 3px $black;
         }
+  
     }
 
     &__experience {

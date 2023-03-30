@@ -1,0 +1,47 @@
+#infosBanner-html {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: calc(100% + 1px);
+    width: 100vw;
+    height: 100%;
+    background-color: $grey-1;
+    color: $white-2;
+    transform: translateX(-100%);
+    transition: transform .4s ease-in;
+
+    /*box-shadow:  4px -2px 9px 3px rgb(12, 12, 12); */
+    /*  backdrop-filter: blur(5px);*/
+    &.active {
+        transform: translateX(0);
+    }
+
+    .Infos-banner {
+        display: flex;
+        
+        #svg-infos {
+            svg {
+                width: 200px;
+                height: 100%;
+
+                path {
+                    fill: none;
+                    stroke: $grey-3;
+                    stroke-width: 5; 
+                    stroke-dasharray: 150575px;
+                    stroke-dashoffset: 150575px;
+                    animation: animSvg 3s ease-in forwards; 
+                }
+            }
+        }
+    }
+    
+}
+
+
+@keyframes animSvg {
+    to {
+        stroke-dashoffset: 0;
+        fill: $white-2; 
+    }
+}
