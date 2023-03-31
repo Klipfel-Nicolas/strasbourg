@@ -1,10 +1,25 @@
 const elements = [
         {
-            name: "Cathédrale",
+            name: "Notre Dame de Strasbourg",
             position: [-21, 4, 0],
             lookAt: [-17, 2, 0],
-            description: "Cathédral de Strasbourg",
-            svg:"/images/cath.svg"
+            svg:"/images/cath.svg",
+            desc1: "La cathédrale Notre-Dame de Strasbourg est assurément un des chefs d’œuvre de l’architecture médiévale, mêlant le style roman de son abside et de son transept au style gothique de sa nef et de sa façade. Sa haute flèche, qui culmine à 143 mètres, a été longtemps le monument le plus haut de la chrétienté.",
+            desc2: "Parmi les merveilles qu’elle abrite, les millions de visiteurs, qu’elle attire chaque année, admirent la chaire du grand prédicateur Geiler de Kaysersberg, la célèbre Horloge astronomique réparée par Schwilgué au XIXème siècle, le Pilier des Anges, qui représente en trois dimensions le Jugement Dernier, les grandes orgues restaurées par Silbermann au XVIIIème siècle, ainsi que les multiples vitraux, dont la grande rosace de façade.",
+            coord: {
+                north: "48° 34' 54″ north",
+                east: " 7° 45' 02″ east",
+            },
+            infos: {
+                height:"142m",
+                date: "1176-1439",
+                visitors: "4 millions/an"
+            },
+            img: [
+                "/images/monuments/cathedral-1.jpeg",
+                "/images/monuments/cathedral-2.jpeg",
+                "/images/monuments/cathedral-3.jpeg"
+            ]
         } ,
         {
             name: "Eglise Ste Madelaine",

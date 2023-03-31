@@ -15,10 +15,16 @@
             position: relative;
         }
 
-        & >div:nth-child(2) {
+        #side-rect-mid {
             border-top: 2px solid $grey-2;
             border-bottom: 2px solid $grey-2;
             box-shadow: 4px 9px 5px 3px $black;
+        }
+
+        #side-rect-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
   
     }

@@ -14,9 +14,15 @@
      
       <!-- Side -->
       <div class="landing-layout__side-bar">
-        <div></div>
-        <div><div id="mainTitle-html"></div></div>
-        <div>
+        
+        <div id="side-rect-top"></div>
+        
+        <div id="side-rect-mid">
+          <div id="mainTitle-html"></div>
+        </div>
+        
+        <div id="side-rect-bottom">
+          <div id="coord"></div>
           <!-- Infos Banner -->
            <div id="infosBanner-html"></div>
         </div>
@@ -92,8 +98,43 @@
     <!-- Infos Banner -->
     <script id="infosBanner-js" type="text/x-handlebars">
       <div class="Infos-banner">
+        
         <div id="svg-infos">{{svg}}</div>
-        <p>{{description}}</p>
+        
+        <div class="Infos-banner__description">
+          <p class="desc-1">{{desc1}}</p>
+          <p class="desc-2">{{desc1}}</p>
+        </div>
+
+        <div class="Infos-banner__infos">
+          <div class="info-1">
+            <p>{{info_key1}}</p>
+            <p>{{info_value1}}</p>
+          </div>
+          <p class="info-2">
+            <p>{{info_key2}}</p>
+            <p>{{info_value2}}</p>
+          </p>
+          <p class="info-3">
+            <p>{{info_key3}}</p>
+            <p>{{info_value3}}</p>
+          </p>
+        </div>
+
+        <div class="Infos-banner__slider">
+          <div>
+            <img src={{image1}} />
+          </div>
+
+          <div>
+            <img src={{image2}}/>
+          </div>
+
+          <div>
+            <img src={{image3}}/> 
+          </div>
+        </div>
+        
       </div>
     </script>
 

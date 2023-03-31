@@ -7,7 +7,6 @@ export default class TitleHtml {
 
         this.mainTitle = title
 
-        this.page.compileTemplate("#mainTitle-js")
         this.setMainTitle(this.mainTitle)
 
         //Handle list elements Focus

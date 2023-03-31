@@ -12,6 +12,14 @@ export default class PageHtml {
     }
     PageHtml.instance = this;
 
+    this.city = {
+      name: 'Strasbourg',
+      coord: {
+        north: "48° 34' 24″ north",
+        east: "7° 45' 08″  east",
+      }
+    }
+
     this.compilePage()
   }
 
@@ -19,10 +27,10 @@ export default class PageHtml {
    * 
    * @param {String} scriptId 
    */
-  compileTemplate(scriptId) {
+  /* compileTemplate(scriptId) {
     this.template = Handlebars.compile(document.querySelector(scriptId).innerHTML) 
   }
-
+ */
   /**
    * 
    * @param {String} htmlId 
@@ -41,11 +49,10 @@ export default class PageHtml {
    * Compile the page with all html class
    */
   async compilePage() {
-
+    this.weather = new WeatherHtml();
     this.list = new ListHtml();
-    this.infosBanner = new InfosBannerHtml()
-    this.title = new TitleHtml("Strasbourg")
-
+    this.infosBanner = new InfosBannerHtml(this.city.coord)
+    this.title = new TitleHtml(this.city.name)
   }
 
 

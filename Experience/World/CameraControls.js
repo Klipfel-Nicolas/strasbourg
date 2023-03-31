@@ -174,9 +174,7 @@ export default class CameraControls extends EventEmitter {
    */
   eventFocusOut(e) {
     if(!this.cameraState.isMoving && this.cameraState.isFocus){
-
       if (e.deltaY < 0) {
-
         this.targetPosititon = this.lastPosition;
         this.cameraState.moveBack = true;
         this.cameraState.isMoving = true;

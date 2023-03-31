@@ -40,8 +40,10 @@ export default class ListHtml extends EventEmitter{
         })
 
         window.addEventListener('wheel', (e) => {
-          this.cameraControls.eventFocusOut(e)
-          this.emit("no-elementFocused");  
+            if(!this.cameraControls.cameraState.isMoving) {
+                this.cameraControls.eventFocusOut(e)
+            this.emit("no-elementFocused");  
+            }
         })
     }
 

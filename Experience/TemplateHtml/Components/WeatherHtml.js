@@ -6,7 +6,7 @@ export default class WeatherHtml {
     constructor() {
         this.page = new PageHtml();
 
-        this.page.compileTemplate("#weather-js");
+        this.setCurrentWeather();
     }
 
     async getCurrentWeather() {
@@ -22,11 +22,11 @@ export default class WeatherHtml {
     async setCurrentWeather() {
         await this.getCurrentWeather();
 
-        this.page.fillHtml("#weather-html", {
+        this.page.innerContent("#weather-js", "#weather-html", {
             currentWeather: this.currentWeather.currentWeather,
             temperature: Math.round(this.currentWeather.temperature),
             windspeed: this.currentWeather.windspeed
-        })
+        });
     }
 
     /**

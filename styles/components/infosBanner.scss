@@ -1,3 +1,9 @@
+#coord {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
 #infosBanner-html {
     position: absolute;
     z-index: -1;
@@ -32,6 +38,20 @@
                     stroke-dashoffset: 150575px;
                     animation: animSvg 3s ease-in forwards; 
                 }
+            }
+        }
+
+        &__description {
+            max-width: 250px;
+        }
+        
+        &__slider {
+            display: flex;
+            width: 300px;
+            overflow: hidden;
+
+            img {
+                width: 250px;
             }
         }
     }
