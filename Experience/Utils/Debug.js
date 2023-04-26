@@ -13,12 +13,13 @@ export default class Debug {
             this.debugFolderLight = this.gui.addFolder('Light')
             this.debugFolderCamera = this.gui.addFolder('Camera')
             this.debugFolderRenderer = this.gui.addFolder('Renderer')
+            this.debugFolderModel = this.gui.addFolder('Model')
             this.debugObject = {}
 
             // stats
             this.stats = new Stats()
             this.stats.showPanel(0)
-            document.getElementById('strasbourg').appendChild( this.stats.dom );
+            //document.getElementById('strasbourg').appendChild( this.stats.dom );
         }
     }
 }

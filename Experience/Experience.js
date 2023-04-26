@@ -58,20 +58,23 @@ export default class Experience {
      */
     updateAllMaterials(castShadow, receiveShadow) {
         this.scene.traverse((child) =>{
+            if(child.name == 'Cube')  {
+                child.material = new THREE.MeshStandardMaterial
+            }
             if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial){
-                child.material.needsUpdate = true
-                
-                /* child.material.color.setHex(0x131862) */
 
                 child.castShadow = castShadow
                 child.receiveShadow = receiveShadow
+
+                child.material.needsUpdate = true
+                
             }
         })
     }
 
     // RESIZE 
     resize() {
-        /* this.camera.resize(); */
+        this.camera.resize();
         this.renderer.resize();
     }
 

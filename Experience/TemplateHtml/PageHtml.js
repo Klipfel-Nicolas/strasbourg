@@ -51,7 +51,7 @@ export default class PageHtml {
   async compilePage() {
     this.weather = new WeatherHtml();
     this.list = new ListHtml();
-    this.infosBanner = new InfosBannerHtml(this.city.coord)
+    /* this.infosBanner = new InfosBannerHtml(this.city.coord) */
     this.title = new TitleHtml(this.city.name)
   }
 

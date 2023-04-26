@@ -10,8 +10,8 @@ export default class Camera {
         this.canvas = this.experience.canvas;
         this.debug = this.experience.debug;
 
-        this.createPerspectiveCamera(0, 45, 0)
-        this.createOrthographicCamera(-10, 10, 0)
+        this.createPerspectiveCamera(-10, 12, 3)
+        //this.createOrthographicCamera(-10, 10, 0)
         this.setControls()
 
     }
@@ -30,13 +30,15 @@ export default class Camera {
         //Debug
         if(this.debug.active) {
             this.debugPerspectiveCamera = this.debug.debugFolderCamera.addFolder('perspective')
-            this.debugPositionPerspectiveCamera = this.debug.debugFolderCamera.addFolder('position')
+            this.debugPositionPerspectiveCamera = this.debugPerspectiveCamera.addFolder('position')
 
             this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'x').min(- 25).max(50).step(1).name('camera-X')
             this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'y').min(- 25).max(50).step(1).name('camera-Y')
             this.debugPositionPerspectiveCamera.add(this.perspectiveCamera.position, 'z').min(- 25).max(50).step(1).name('camera-Z')
         }
         
+        //Grid Helper
+        //this.createGridHelper(50, 50, 0xffffff, 'lime', 6 )
     }
 
     /**
@@ -78,8 +80,11 @@ export default class Camera {
         // Helper
         /*  const size = 50;
         const divisions = 50;
+        const colorLinesCenter = 0xffffff;
+        const colorLinesGrid = new THREE.Color('lime');
 
-        const gridHelper = new THREE.GridHelper( size, divisions );
+        const gridHelper = new THREE.GridHelper( size, divisions, colorLinesCenter, colorLinesGrid );
+        gridHelper.material.linewidth = 6;
         this.scene.add( gridHelper ); 
 
         const axesHelper = new THREE.AxesHelper( 5 );
@@ -99,6 +104,34 @@ export default class Camera {
     resize() {
         this.perspectiveCamera.aspect = this.sizes.width / this.sizes.height
         this.perspectiveCamera.updateProjectionMatrix()
+    }
+
+    //GRID HELPER
+    /**
+     * 
+     * @param {number} size 
+     * @param {number} divisions 
+     * @param {0xffffff} colorLinesCenter 
+     * @param {string} colorLinesGrid 
+     * @param {number} linewidth 
+     * @param {number} axesHelper 
+     */
+    createGridHelper(
+        size, 
+        divisions, 
+        colorLinesCenter = 0xffffff, 
+        colorLinesGrid = '', 
+        linewidth = 1,
+        axesHelper = 5
+    ) {
+        const colorLinesGridThree = new THREE.Color(colorLinesGrid);
+
+        const gridHelper = new THREE.GridHelper( size, divisions, colorLinesCenter, colorLinesGridThree );
+        gridHelper.material.linewidth = linewidth;
+        this.scene.add( gridHelper ); 
+
+        const axesHelperThree = new THREE.AxesHelper( axesHelper );
+        this.scene.add( axesHelperThree ); 
     }
 
     //UPDATE

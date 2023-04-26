@@ -32,11 +32,11 @@ export default class Renderer {
         this.renderer.setSize(this.sizes.width, this.sizes.height)
         this.renderer.setPixelRatio(this.sizes.pixelRatio)
         this.renderer.physicallyCorrectLights = true
-        this.renderer.outputEncoding = THREE.sRGBEncoding
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-        this.renderer.toneMappingExposure = 1.75
+        this.renderer.toneMappingExposure = 1
         this.renderer.shadowMap.enabled = true
-        this.renderer.shadowMap.type = THREE.PCFShadowMap
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
         // Debug
         if(this.debug.active) {
@@ -51,6 +51,8 @@ export default class Renderer {
                 this.renderer.toneMapping = Number(this.renderer.toneMapping)
                 this.experience.updateAllMaterials(true, true)
             })
+
+            this.debug.debugFolderRenderer.add(this.renderer, 'toneMappingExposure').min(0).max(7).step(.1).name('exposure')
         }
     }
 
